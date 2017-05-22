@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>demo</title>
+  
+
+</head>
+<body>
+  <div id="demo">
+
+  </div>
+
+  <script src="https://cdn.bootcss.com/babel-core/5.8.38/browser.min.js"></script>
+  <script src="https://cdn.bootcss.com/react/15.5.4/react.js"></script>
+  <script src="https://cdn.bootcss.com/react/15.5.4/react-dom.js"></script>
+  <script src="../dist/ReactNoUnmountHide.js"></script>
+  <script type="text/babel">
+    class Demo extends React.Component {
+      constructor() {
+        super();
+        this.state = {
+          value: false,
+          haha: 'haha'
+        };
+      }
+
+      render() {
+        return (
+          <div>
+            <ReactNoUnmountHide value={this.state.value}>
+              <Sub haha={this.state.haha} />
+            </ReactNoUnmountHide>
+            <button onClick={() => this.setState({ value: !this.state.value, haha: Math.random() })}>toggle</button>
+          </div>
+        );
+      }
+    }
+
+    class Sub extends React.Component {
+      render() {
+        return (
+          <div>{this.props.haha}</div>
+        )
+      }
+    }
+
+    ReactDOM.render(
+      <Demo />,
+      document.getElementById('demo')
+    );
+  </script>
+</body>
+</html>
