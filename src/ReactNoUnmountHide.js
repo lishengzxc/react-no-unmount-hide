@@ -1,23 +1,19 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-
+import React, { Component } from "react";
+import ReactDOM from "react-dom";
 
 export default class ReactNoUnmountHide extends Component {
   constructor() {
     super();
+
+    this.ref = React.createRef();
   }
 
   toggle(value) {
-    if (value) {
-      this.dom.style.display = 'none';
-    } else {
-      this.dom.style.display = null;
-    }
+    this.dom.style.display = value ? null : "none";
   }
 
   componentDidMount() {
-    this.dom = ReactDOM.findDOMNode(this.refs.container);
-
+    this.dom = ReactDOM.findDOMNode(this.ref.current);
     this.toggle(this.props.value);
   }
 
@@ -27,8 +23,7 @@ export default class ReactNoUnmountHide extends Component {
     }
   }
 
-
   render() {
-    return React.cloneElement(this.props.children, { ref: 'container' });
+    return React.cloneElement(this.props.children, { ref: this.ref });
   }
-};
+}
